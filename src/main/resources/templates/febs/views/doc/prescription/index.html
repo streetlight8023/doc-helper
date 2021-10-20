@@ -1,0 +1,761 @@
+<style>
+    #febs-menu xm-select {
+        min-height: 30px;
+        line-height: 30px;
+    }
+</style>
+<div class="layui-fluid layui-anim febs-anim" id="febs-menu" lay-title="菜单管理">
+    <div class="layui-row layui-col-space8 febs-container">
+        <div class="layui-col-md12 top-contain">
+            <div class="layui-card drug-tree">
+                <div class="layui-card-body febs-table-full">
+                    <form class="layui-form layui-table-form" lay-filter="menu-table-form" id="menu-table-form">
+                        <div class="layui-row">
+                            <div class="layui-col-md8 layui-col-sm9 layui-col-xs9">
+                                <div class="layui-form-item">
+                                    <div class="layui-inline">
+                                        <label class="layui-form-label layui-form-label-sm">名称</label>
+                                        <div class="layui-input-inline">
+                                            <input type="text" name="stackName" id="areaId" autocomplete="off"
+                                                   class="layui-input">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-md4 layui-col-sm12 layui-col-xs12 table-action-area">
+                                <div class="layui-btn layui-btn-sm layui-btn-primary febs-button-blue-plain  table-action"
+                                     id="query">
+                                    <i class="layui-icon">&#xe848;</i>
+                                </div>
+                                <div class="layui-btn layui-btn-sm layui-btn-primary febs-button-green-plain  table-action"
+                                     id="reset">
+                                    <i class="layui-icon">&#xe79b;</i>
+                                </div>
+                                <div class="layui-btn layui-btn-sm layui-btn-primary table-action action-more"
+                                     shiro:hasAnyPermissions="menu:add,menu:delete,menu:export">
+                                    <i class="layui-icon">&#xe875;</i>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="eleTree prescriptionTree " lay-filter="menuTree" style="margin-left: 1rem"></div>
+                </div>
+            </div>
+            <div class="main-back">
+                <div class="main">
+                    <div class="main-title">宁国市中医院</div>
+                    <div class="second-title">初诊记录</div>
+                    <div class="header2">
+                        <span>就诊科室：石泽武工作室</span>
+                        <span class="menzhen">门诊号：123</span>
+                    </div>
+                    <div class="patient-detail">
+                        <table>
+                            <tr>
+                                <td>
+                                    <span class="patient-name">姓名：<span><input class="input-patient-name" type="text" 张三
+                                                                               name="patientName"
+                                                                               placeholder="张三"/></span></span>
+                                </td>
+                                <td>
+                                    <span class="patient-gender">性别：<span><input class="input-patient-gender"
+                                                                                 type="text" value="女"
+                                                                                 name="patientGender" placeholder="女"/></span></span>
+                                </td>
+                                <td>
+                                    <span class="patient-age">年龄：<span><input class="input-patient-age" type="text"
+                                                                              value="54" name="patientAge"
+                                                                              placeholder="23"/></span></span>
+                                </td>
+                                <td>
+                                    <span class="patient-age">民族：<span><input class="input-patient-national" type="text"
+                                                                              value="汉族" name="national"
+                                                                              placeholder="汉族"/></span></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="patient-birthday">出生日期：<span><input class="input-patient-birthday"
+                                                                                     type="text" value="1995-10-09"
+                                                                                     name="birthday"
+                                                                                     placeholder="1991-05-01"/></span></span>
+                                </td>
+                                <td colspan="2">
+                                    <span class="patient-id">身份证号：<span><input class="input-patient-id" type="text"
+                                                                               value="4555555121212126"
+                                                                               name="patientID"/></span></span>
+                                </td>
+                                <td></td>
+                                <td></td>
+
+                            </tr>
+                            <tr>
+                                <td colspan="4">
+                                    <span class="patient-job">职业：<span><input class="input-patient-job" type="text"
+                                                                              value="个体户" name="job"/></span></span>
+                                </td>
+                            </tr>
+                        </table>
+
+
+                    </div>
+                    <div class='chief-action'>主诉：
+                        <div class="chief-action div-parent">
+                            <div id="dummy-chief-action"></div>
+                            <textarea class="chief-action-textarea"
+                                      oninput="document.getElementById('dummy-chief-action').textContent = this.value"
+                                      placeholder="双膝关节痛"></textarea>
+                        </div>
+
+
+                        <div class='medical-history'>现病史:
+                            <div class="medical-history div-parent">
+                                <div id="dummy-medical-history"></div>
+                                <textarea class="medical-history-textarea"
+                                          oninput="document.getElementById('dummy-medical-history').textContent = this.value"
+                                          placeholder="现病史"></textarea>
+                            </div>
+                        </div>
+
+                        <div class='convid-statement-1'>就诊前14天是否有疫情中、高风险地区的旅居史</div>
+
+
+                        <div class='convid-statement-detail'>
+                            <div class='convid-statement-neg'>
+                                <input type="checkbox" checked="checked"/>否
+                            </div>
+                            <div class='convid-statement-act'>
+                                <input type="checkbox"/>是
+                            </div>
+                            <input class="input-convid" type="text" name="convid-foreign"/>
+                        </div>
+
+
+                        <div class='convid-statement-2'>就诊前14天是否有境外国家和地区的旅行或者居住史</div>
+
+                        <div class='convid-statement-detail'>
+                            <div class='convid-statement-neg'>
+                                <input type="checkbox" checked="checked"/>否
+                            </div>
+                            <div class='convid-statement-act'>
+                                <input type="checkbox"/>是
+                            </div>
+                            <input class="input-convid" type="text" name="convid-home"/>
+                        </div>
+                        <div class="somke-history">
+                            <div class="somke-statement">吸烟史:</div>
+                            <div class="somke-time">吸烟时间<input class="input-cigarettes" type="text" placeholder="0"
+                                                               name="cigarette-time"/></div>
+                            <div class="somke-time-other">年，平均每天吸烟<input class="input-cigarettes" type="text"
+                                                                         placeholder="0" name="cigarette-count"/>支
+                            </div>
+                        </div>
+                        <div>初步诊断:</div>
+                        <div class="primy-diagnosis div-parent">
+                            <div id="dummy-primy-diagnosis"></div>
+                            <textarea class="primy-diagnosis-textarea" id="primy-diagnosis-id"
+                                      oninput="document.getElementById('dummy-primy-diagnosis').textContent = this.value"
+                                      placeholder="诊断内容"></textarea>
+                        </div>
+                        <div class="deal-mode">处置:</div>
+                        <div class="handle-content div-parent">
+                            <div id="dummy-handle-content"></div>
+                            <textarea class="handle-content-textarea" id="handle-content-id"
+                                      oninput="document.getElementById('dummy-handle-content').textContent = this.value"
+                                      placeholder="中药内容"></textarea>
+                        </div>
+                        <!-- <div class="blank-box"></div> -->
+                        <div class="doc-contain">
+                            <div class="doc-sign">医生签名：<input type="text" placeholder="石泽武" name="doc-name"/></div>
+                            <div class="doc-sign-block"></div>
+                            <div class="doc-sign-date">签名日期</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="user-option">
+    <a lay-event="del" shiro:hasPermission="user:delete"><i class="layui-icon febs-edit-area febs-red">&#xe7f9;</i></a>
+</script>
+
+
+<script data-th-inline="none" type="text/javascript">
+    layui.use(['dropdownMenu', 'jquery', 'febs', 'form', 'eleTree', 'validate', 'xmSelect'], function () {
+        let $ = layui.jquery,
+            febs = layui.febs,
+            form = layui.form,
+            validate = layui.validate,
+            eleTree = layui.eleTree,
+            xmSelect = layui.xmSelect,
+            dropdownMenu = layui.dropdownMenu,
+            $view = $('#febs-menu'),
+            $area = $('#areaId'),
+            $query = $view.find('#query'),
+            $reset = $view.find('#reset'),
+            $submit = $view.find('#submit'),
+            $currentStackId = $view.find('#currentStackId'),
+            $addDrugId = $view.find('#addDrugId'),
+            $searchForm = $view.find('#menu-table-form'),
+            $stackName = $searchForm.find('input[name="stackName"]'),
+            $type = $view.find('input[type="radio"][name="type"]'),
+            $icon = $view.find('input[name="icon"]'),
+            $icon_parent = $icon.parents('.layui-form-item'),
+            $url = $view.find('input[name="url"]'),
+            $url_parent = $url.parents('.layui-form-item'),
+            $order = $view.find('input[name="orderNum"]'),
+            $order_parent = $order.parents('.layui-form-item'),
+            $header = $view.find('#form-header'),
+            tableIns,
+            _currentMenuData,
+            menuXmlSelect,
+            _menuTree;
+
+
+        form.verify(validate);
+        form.render();
+
+
+        menuXmlSelect = xmSelect.render({
+            el: '#parent-menu-id',
+            model: {label: {type: 'text'}},
+            tree: {
+                show: true,
+                strict: false,
+                showLine: false,
+                clickCheck: true,
+                expandedKeys: [-1],
+            },
+            name: 'parentId',
+            theme: {
+                color: '#52c41a',
+            },
+            prop: {
+                value: 'id',
+                name: 'title',
+                children: 'childs'
+            },
+            height: 'auto',
+            on: function (data) {
+                if (data.isAdd) {
+                    return data.change.slice(0, 1)
+                }
+            }
+        });
+
+        febs.get(ctx + 'stack/tree', null, function (data) {
+            menuXmlSelect.update(data)
+        });
+
+
+        dropdownMenu.render({
+            elem: $view.find('.action-more'),
+            click: function (name, elem, event) {
+                if (name === 'add') {
+                    reset();
+                    febs.alert.info("请在表单中填写相关信息");
+                }
+                if (name === 'delete') {
+                    let checked = _menuTree.getChecked(false, true);
+                    if (checked.length < 1) {
+                        febs.alert.warn('请勾选需要删除的菜单或按钮');
+                        return;
+                    }
+                    let ids = [];
+                    layui.each(checked, function (key, item) {
+                        ids.push(item.id)
+                    });
+                    febs.modal.confirm('提示', '当您点击确定按钮后，这些记录将会被彻底删除，如果其包含子记录，也将一并删除！', function () {
+                        febs.get(ctx + 'stack/delete/' + ids.join(','), null, function () {
+                            febs.alert.success('删除成功！');
+                            reloadMenuTree();
+                            reset();
+                        })
+                    });
+                }
+                if (name === 'export') {
+                    febs.download(ctx + 'menu/excel', {
+                        "stackName": $stackName.val().trim()
+                    }, '菜单信息表.xlsx');
+                }
+            },
+            options: [{
+                name: 'add',
+                title: '新增',
+            }, {
+                name: 'delete',
+                title: '删除',
+            }, {
+                name: 'export',
+                title: '导出Excel',
+            }]
+        });
+
+        _menuTree = renderMenuTree();
+
+
+        // eleTree.on("nodeClick(menuTree)", function (d) {
+        //     let data = d.data.currentData.data;
+        //     _currentMenuData = data;
+        //     $type.attr("disabled", true);
+        //     let type = data.type;
+        //     handleTypeChange(type);
+        //     if (type === '0') { // 菜单
+        //         $header.text('修改菜单');
+        //     } else { // 按钮
+        //         $header.text('修改组套');
+        //     }
+        //
+        //     form.val("menu-form", {
+        //         "icon": data.icon,
+        //         "sortOrder": data.sortOrder,
+        //         "stackName": data.stackName,
+        //         "perms": data.perms,
+        //         "id": data.id
+        //     });
+        //
+        //     $currentStackId.val(data.id)
+        //
+        //     console.log("org"+ data.id+" new "+$currentStackId.val())
+        //     getDrugDetail(data.id);
+        //
+        //     if (data.parentId) {
+        //         menuXmlSelect.setValue([data.parentId]);
+        //     } else {
+        //         menuXmlSelect.setValue([])
+        //     }
+        // });
+
+        form.on("radio(menu-type)", function (data) {
+            handleTypeChange(data.value);
+        });
+
+        $reset.on('click', function () {
+            $stackName.val('');
+            reloadMenuTree();
+            reset();
+        });
+
+        $query.on('click', function () {
+            reloadMenuTree();
+            reset();
+        });
+
+        $submit.on('click', function () {
+            $view.find('#submit-form').trigger('click');
+        });
+
+        $addDrugId.on('click', function () {
+            // console.log("currentStackId " +$currentStackId.val());
+            // var url='doc/advice/toadd/';
+            // if($currentStackId.val()){
+            //     url=url+$currentStackId.val()
+            // }else{
+            //     url=url+0
+            // }
+
+            febs.modal.open('新增用户', 'doc/advice/toadd/' + $currentStackId.val(), {
+                btn: ['提交', '重置'],
+                area: $(window).width() <= 750 ? '95%' : '50%',
+                yes: function (index, layero) {
+                    $('#user-add').find('#submit').trigger('click');
+                },
+                btn2: function () {
+                    $('#user-add').find('#reset').trigger('click');
+                    return false;
+                }
+            });
+        });
+
+        $icon.focus(function () {
+            febs.modal.open('图标选择', 'others/febs/icon', {
+                btn: ['确定'],
+                yes: function () {
+                    let icon = $('#febs-icon').find('.icon-active .icon-name').text();
+                    if (icon) {
+                        form.val("menu-form", {
+                            "icon": 'layui-icon-' + icon
+                        });
+                    } else {
+                        form.val("menu-form", {
+                            "icon": ''
+                        });
+                    }
+                    layer.closeAll();
+                }
+            });
+        });
+
+        function reset() {
+            $view.find('#reset-form').trigger('click');
+            handleTypeChange('0');
+            $type.removeAttr("disabled");
+        }
+
+
+        function renderMenuTree() {
+            _menuTree = eleTree.render({
+                elem: '.prescriptionTree',
+                url: ctx + 'stack/tree',
+                where: {
+                    "stackName": $stackName.val().trim(),
+                    "invalidate_ie_cache": new Date()
+                },
+                accordion: true,
+                highlightCurrent: true,
+                showCheckbox: true,
+                checkStrictly: true,
+                renderAfterExpand: false,
+                request: {
+                    name: "title",
+                    key: "id",
+                    children: "childs",
+                    checked: "checked",
+                    data: "data"
+                },
+                response: {
+                    statusName: "code",
+                    statusCode: 200,
+                    dataName: "data"
+                }
+            });
+            return _menuTree;
+        }
+
+        function reloadMenuTree() {
+            _menuTree = renderMenuTree();
+        }
+
+
+        function getDrugDetail(stackId) {
+            var params = {stackId: stackId};
+
+            // let params = $.extend( person);
+            // console.log('params'+params);
+            tableIns.reload({where: params, page: {curr: 1}});
+        }
+
+
+        let handleTypeChange = function (type) {
+            form.val("menu-form", {
+                "icon": '',
+                "url": '',
+                "orderNum": ''
+            });
+            if (type === '1') {
+                $header.text('新增按钮');
+                $icon_parent.hide();
+                $url_parent.hide();
+                $order_parent.hide();
+            } else {
+                $header.text('新增组套');
+                $icon_parent.show();
+                $url_parent.show();
+                $order_parent.show();
+            }
+        };
+
+        form.on('submit(menu-form-submit)', function (data) {
+            if (data.field.id && $header.text().indexOf('修改') !== -1) {
+                if (febs.nativeEqual(data.field, _currentMenuData)) {
+                    febs.alert.warn('数据未作任何修改！');
+                    return false;
+                }
+                febs.post(ctx + 'stack/update', data.field, function () {
+                    febs.alert.success('修改成功');
+                    reloadMenuTree();
+                    reset();
+                })
+            } else {
+                febs.post(ctx + 'stack', data.field, function () {
+                    febs.alert.success('新增成功');
+                    reloadMenuTree();
+                    reset();
+                })
+            }
+            return false;
+        });
+
+        // function getQueryParams(stackId) {
+        //     var params;
+        //     params.stackId=stackId;
+        //     return params;
+        // }
+    });
+</script>
+
+<style>
+    .input-convid {
+        width: 200px;
+        padding: 2px 0px;
+        border: 0px;
+        border-bottom: 2px black solid;
+    }
+
+    .input-cigarettes {
+        width: 20px;
+        padding: 2px 0px;
+        border: 0px;
+        text-align: center;
+        border-bottom: 2px black solid;
+    }
+
+    /*.medical-history-div-parent,.chief-action-div-parent,.primy-diagnosis-div-parent,.handle-content-div-parent {*/
+    .div-parent {
+        margin-left: 50px;
+        width: 500px;
+        font: 12px monospace;
+        position: relative;
+
+    }
+
+    #dummy-medical-history, #dummy-chief-action, #dummy-primy-diagnosis, #dummy-handle-content {
+        padding: 2px;
+        border: 1px solid;
+        visibility: hidden;
+        white-space: pre-wrap;
+    }
+
+    #dummy-medical-history::after, #dummy-chief-action::after, #dummy-primy-diagnosis::after, #dummy-handle-content::after {
+        content: " ";
+    }
+
+    textarea {
+        outline-style: none;
+        border: 0px;
+        position: absolute;
+        rows: 3;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        resize: none;
+        width: 100%;
+        font: inherit;
+    }
+
+    .input-patient-name {
+        width: 50px;
+    }
+
+    .input-patient-gender {
+        width: 50px;
+    }
+
+    .input-patient-age {
+        width: 50px;
+    }
+
+    .input-patient-id {
+        width: 200px;
+
+    }
+
+    .input-patient-national {
+        width: 50px;
+    }
+
+    .input-patient-job {
+        width: 500px;
+
+    }
+
+    .input-patient-birthday {
+        width: 100px;
+
+    }
+
+    input {
+        padding: 2px 0px;
+        /*width: 20px;*/
+
+
+        outline-style: none;
+        border: 0px;
+        /*border: 1px solid #ccc; */
+        /*border-radius: 3px;*/
+        /*padding: 20px 30px;*/
+    }
+
+    .somke-statement, .somke-time, .somke-time-other {
+        float: left;
+    }
+
+    /*.deal-mode{
+        height: 100px;
+    }*/
+    /*相当于在deal-mode下边添加一个元素*/
+    .deal-mode::after {
+        display: block;
+        clear: both;
+    }
+
+    .doc-contain {
+        margin-top: 100px;
+        height: 50px;
+    }
+
+    /*.blank-box{
+        height:60px;
+    }*/
+    .doc-sign {
+        float: right;
+    }
+
+    .doc-sign-date {
+        float: right;
+    }
+
+    .doc-sign-block {
+        height: 25px;
+    }
+
+    .somke-history {
+        height: 25px;
+    }
+
+    .input-class {
+        border: 0;
+        outline: none;
+        background-color: rgba(0, 0, 0, 0);
+    }
+
+    .somke-time-input {
+        border-left:: 20px;
+        padding-left:: 20px;
+        width: 30px;
+        height: 17px;
+        font-size: 15px;
+        float: left;
+        border-bottom: 2px black solid;
+    }
+
+    .somke-time-num {
+        width: 10px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    。
+    .box1 {
+        width: 2000px;
+        height: 2000px;
+        background: orange;
+        /*float: right;*/
+    }
+
+    .box2 {
+        width: 100px;
+        height: 100px;
+        background: yellow;
+    }
+
+    .box3 {
+        width: 20px;
+        height: 25px;
+        font-size: 20px;
+        border-bottom: 3px black solid;
+    }
+
+    .outer {
+        width: 600px;
+        height: 100px;
+        border: 10px red solid;
+    }
+
+    .top-contain {
+        width: 2000px;
+        height: 1000px;
+        overflow: auto;
+    }
+
+    .drug-tree {
+        width: 600px;
+        height: 100%;
+        float: left;
+    }
+
+    .main {
+        width: 600px;
+        height: 100%;
+        background-color: #fff;
+        /*float: left;*/
+        margin-right: auto;
+        margin-left: auto;
+
+    }
+
+    .main-back {
+        padding: 10px;
+        width: 1000px;
+        height: 1000px;
+        border-color: red;
+        float: left;
+        background-color: #99b3ff
+
+    }
+
+    .main-title {
+        width: 200px;
+        font-size: 30px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .second-title {
+        width: 120px;
+        font-size: 25px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .header2 {
+        border-bottom: 3px black solid;
+    }
+
+    .header2 > span:first-child {
+        width: 300px;
+        margin-right: 300px;
+    }
+
+    .header2 > span:last-child {
+        width: 100px;
+    }
+
+    /*.header2 > span:last-child{
+        margin-left:auto;
+        margin-right:1px;
+    } */
+    .patient-detail > span:not(:first-child) {
+        width: 100px;
+        margin-right: auto;
+        margin-left: 80px;
+    }
+
+    .convid-statement-neg {
+        width: 50px;
+        float: left;
+    }
+
+    .convid-statement-act {
+        width: 50px;
+        float: left;
+    }
+
+    .convid-statement-act-input {
+        width: 200px;
+        float: left;
+        height: 20px;
+        border-bottom: 2px black solid;
+    }
+
+    .convid-statement-detail {
+        /*height: 25px;*/
+    }
+
+    .convid-statement-2, .somke-history {
+        clear: left;
+    }
+</style>

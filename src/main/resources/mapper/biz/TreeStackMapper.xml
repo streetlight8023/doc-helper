@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.mrbird.febs.biz.mapper.TreeStackMapper">
+    <resultMap id="treeStack" type="cc.mrbird.febs.biz.controller.vo.TreeStackVo">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="parent_id" jdbcType="DECIMAL" property="parentId" />
+        <result column="stack_name" jdbcType="VARCHAR" property="stackName" />
+        <result column="user_id" jdbcType="VARCHAR" property="userId" />
+        <result column="icon" jdbcType="VARCHAR" property="icon" />
+        <result column="sort_order" jdbcType="INTEGER" property="sortOrder" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+    </resultMap>
+
+    <select id="findUserTreeStack" resultMap="treeStack">
+        SELECT * from tree_stack where user_id ={userId}
+    </select>
+
+</mapper>

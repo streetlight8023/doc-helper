@@ -1,0 +1,98 @@
+<style>
+    #user-add {
+        padding: 20px 25px 25px 0;
+    }
+</style>
+<div class="layui-fluid" id="user-add">
+    <form class="layui-form" action="" lay-filter="user-add-form">
+        <input type="text" id="currentStackId" class="febs-hide" name ="stackId" data-th-value="${stackId}">
+
+        <div class="layui-form-item">
+            <label class="layui-form-label febs-form-item-require">药物名称：</label>
+            <div class="layui-input-block">
+                <input type="text" name="drugName"  autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">每次剂量：</label>
+            <div class="layui-input-block">
+                <input type="text" name="perDose" id ="perDoseId"  autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">用法：</label>
+            <div class="layui-input-block">
+                <input type="text" name="useWay" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">每日次数：</label>
+            <div class="layui-input-block">
+                <input type="text" name="timePerDay" id ="timePerDayId" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">服用天数：</label>
+            <div class="layui-input-block">
+                <input type="text" name="days"  id ="daysId" autocomplete="off" class="layui-input" lay-filter="totalDoseFilter">
+            </div>
+        </div>
+<!--        <div class="layui-form-item">-->
+<!--            <label class="layui-form-label">总剂量：</label>-->
+<!--            <div class="layui-input-block">-->
+<!--                <input type="text" name="totalDose"  id ="totalDoseId" autocomplete="off" class="layui-input">-->
+<!--            </div>-->
+<!--        </div>-->
+
+        <div class="layui-form-item">
+            <label class="layui-form-label febs-form-item-require">剂量单位：</label>
+            <div class="layui-input-block">
+                <input type="radio" name="doseUnit" value="10mg" title="10mg">
+                <input type="radio" name="doseUnit" value="50mg" title="50mg">
+            </div>
+        </div>
+
+        <div class="layui-form-item febs-hide">
+            <button class="layui-btn" lay-submit="" lay-filter="drug-add-form-submit" id="submit"></button>
+            <button type="reset" class="layui-btn" id="reset"></button>
+        </div>
+    </form>
+</div>
+
+<script>
+    layui.use(['febs', 'form', 'validate', 'xmSelect'], function () {
+        let $ = layui.$,
+            febs = layui.febs,
+            layer = layui.layer,
+            drugAddForm = layui.form,
+            validate = layui.validate;
+
+            drugAddForm.verify(validate);
+            drugAddForm.render();
+
+
+
+        function getTotalDose(){
+            var perDose = $("#perDoseId").val();
+            var timePerDay = $("#timePerDayId").val();
+            var days = $("#daysId").val();
+            if(perDose && timePerDay && days ){
+                totalDoseId
+                $("#totalDoseId").val(perDose*timePerDay*days);
+            }
+        }
+
+        drugAddForm.on('input(totalDoseFilter)', function(data){
+            getTotalDose();
+        });
+
+        drugAddForm.on('submit(drug-add-form-submit)', function (data) {
+            febs.post(ctx + 'advice', data.field, function () {
+                layer.closeAll();
+                febs.alert.success('新增药品成功');
+                $('#febs-doc').find('#currentStackId').click();
+            });
+            return false;
+        });
+    });
+</script>
